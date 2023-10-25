@@ -1,0 +1,94 @@
+.authSection{
+    @apply min-h-screen;
+    @apply my-0 mx-auto;
+    @apply bg-light-text;
+    @apply flex justify-center items-center gap-8;
+}
+
+.aboutAuth{
+    @apply py-5 mr-7;
+
+    h1{
+        @apply text-2xl font-normal pb-4; 
+    }
+
+    p{
+        @apply py-2 text-sm;
+    }
+
+}
+
+.loginLogo{
+    @apply py-5 px-6;
+}
+
+.authContainer{
+    @apply w-25_100;
+    @apply flex justify-center items-center flex-col;
+
+    form{
+        @apply w-full bg-white;
+        @apply flex flex-col justify-evenly;
+        @apply p-6 rounded-lg;
+        box-shadow: 0 10px 25px rgb(0 0 0 / 5%), 0 20px 48px rgb(0 0 0 / 5%),
+          0 1px 4px rgb(0 0 0 / 10%);
+
+        p{
+            @apply text-[10px] text-light-gray;
+            word-wrap: break-word;
+        }
+
+        label{
+            @apply text-text-color text-[13px] font-bold;
+        }
+
+        .input{
+            @apply p-2 w-full rounded-md;
+            @apply text-xs;
+            border: solid 1px#0000003e;
+        }
+
+        .input:focus{
+            @apply outline-none;
+            @apply border border-solid border-link-color;
+            @apply shadow-sm shadow-blue-300;
+        }
+
+        label:nth-child(1) h4,
+        label:nth-child(2) h4,
+        label:nth-child(3) h4 {
+            @apply mb-1 mt-2;
+            
+        }
+
+        label:nth-child(4) {
+            @apply flex;
+        }
+
+        label:nth-child(4) input {
+            @apply w-10_100;
+        }
+    }
+}
+
+.authBtn{
+    @apply mt-2 py-2 px-1  rounded-md;
+    @apply bg-link-color cursor-pointer;
+    @apply border-solid border border-link-color;
+    @apply text-sm text-white;
+    transition: 0.2s;
+    font-weight: 500;
+
+    @apply hover:bg-slate-500;
+}
+
+.switchBtn{
+    @apply bg-transparent text-link-color;
+    @apply border-none text-sm cursor-pointer;
+}
+  
+@media screen and (max-width: 820px) {
+    .auth-container-1 {
+      display: none;
+    }
+}
