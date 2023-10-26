@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -31,6 +34,8 @@ module.exports = {
         'btn-color': '#4e0eff',
         'hover-btn-color': '#6531f7',
         'avatar-bg': '#009dff',
+        'light-gray': '#666767',
+        'text-color': '#3b4045',
       },
       spacing: {
         '128': '32rem',

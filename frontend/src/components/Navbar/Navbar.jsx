@@ -32,7 +32,7 @@ const Navbar = () => {
             <Link to="/Auth"  className={`${styles.navItem} ${styles.navBtn}`} >Log In</Link>
           ):(
             <>
-              <Avatar backgroundColor='#009dff' px='10px' py='7px' borderRadius='50%'>
+              <Avatar backgroundColor='#009dff' px='10px' py='5px' borderRadius='50%'>
                 <Link to='/Auth'>M</Link>
               </Avatar>
               <button className={`${styles.navItem} ${styles.navBtn}`} >Log out</button>
