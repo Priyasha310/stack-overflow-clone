@@ -28,6 +28,7 @@ module.exports = {
         'nav-hover':'rgb(226, 226, 226)',
         'nav-text': 'rgb(69, 69, 69)',
         'link-color': '#1B75D0',
+        'icon-color':'#ef8236',
         'bg-color': '#131324',
         'light-text': '#f0ecf9',
         'heading-color': '#6f42c1',
