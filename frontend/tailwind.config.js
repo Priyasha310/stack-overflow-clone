@@ -36,7 +36,12 @@ module.exports = {
         'hover-btn-color': '#6531f7',
         'avatar-bg': '#009dff',
         'light-gray': '#666767',
+        '':'#e3e6e8',
+        'search-input-color': '#0000003e',
         'text-color': '#3b4045',
+        'orange': '#f9ebc8',
+        'dark-orange':'#F4D27B',
+        'light-orange': '#fdf8ed',
       },
       spacing: {
         '128': '32rem',

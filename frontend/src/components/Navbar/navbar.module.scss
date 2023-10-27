@@ -67,7 +67,7 @@
     input{
         @apply py-1 pl-8 pr-2;
         @apply rounded-md;
-        border: solid 1px #0000003e;
+        @apply border border-solid border-search-input-color;
     }
     
     ::placeholder{

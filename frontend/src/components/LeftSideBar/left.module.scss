@@ -1,14 +1,14 @@
 .leftSidebar{
-    @apply w-44 h-auto min-h-screen;
-    @apply sticky;
+    @apply w-40 h-auto min-h-screen;
+    @apply box-border;
     @apply border-r border-solid border-light-gray;
-    @apply text-xs box-border;
+    @apply text-xs;
     box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
     transition: box-shadow ease-in-out 0.1s, transform ease-in-out 0.1s;
 } 
 
 .sideNav{
-    @apply mt-4;
+    @apply mt-7;
 }
 
 .divHeading{
@@ -21,9 +21,6 @@
     @apply p-2;
     @apply cursor-pointer;
     @apply flex flex-row gap-[2px];
-   
-    
-
 }
 
 .active{ 
@@ -31,66 +28,3 @@
     @apply border-r-4 border-solid border-icon-color;
 }
 
-// .leftSidebar {
-//     width: 164px;
-//     box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
-//     background-color: white;
-//     height: auto;
-//     min-height: 100vh;
-//     transition: box-shadow ease-in-out 0.1s, transform ease-in-out 0.1s;
-//     box-sizing: border-box;
-//     font-size: 13px;
-//   }
-  
-//   .navBtn {
-//     background-color: inherit;
-//     width: 100%;
-//     border: none;
-//     padding: 0%;
-//   }
-  
-//   .sideNav {
-//     height: auto;
-//     max-width: 100%;
-//     position: sticky;
-//     margin: 50px 0px;
-//     padding: 20px 0px;
-//   }
-  
-//   .sideNavDiv {
-//     padding: 10px 0px;
-//   }
-  
-//   .sideNavDiv div {
-//     padding-left: 10px;
-//   }
-  
-//   .sideNavLinks {
-//     text-decoration: none;
-//     color: #3a3a3a;
-//     display: flex;
-//     align-items: center;
-//     justify-content: flex-start;
-//     padding-left: 10px;
-//     transition: 0.2s;
-//   }
-  
-//   .sideNavLinks:hover {
-//     color: black;
-//   }
-  
-//   .active {
-//     font-weight: bolder;
-//     color: black;
-//     background-color: rgb(225, 225, 225);
-//     border-right: solid 3px #ef8236;
-//   }
-  
-//   @media screen and (max-width: 760px) {
-//     .leftSidebar {
-//       position: absolute;
-//       transform: translateX(-100%);
-//       z-index: 10;
-//     }
-//   }
-  

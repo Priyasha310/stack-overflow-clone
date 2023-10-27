@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './home.module.scss'
+import '../../App.css'
 import RightSideBar from '../../components/RightSideBar/RightSideBar'
 import QGlossary from '../../components/QuestionGlossary/QGlossary'
 import LeftSideBar from '../../components/LeftSideBar/LeftSideBar'
