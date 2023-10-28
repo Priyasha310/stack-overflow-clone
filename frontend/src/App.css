@@ -1,13 +1,11 @@
 .homeContainer{
-  @apply min-h-screen;
-  @apply w-full max-w-[1250px];
-  @apply flex justify-center items-center;
-  @apply. my-0 mx-auto;
+  @apply flex flex-row;
+  @apply w-90_100 mx-auto;
+  
 }
 
 .contentContainer{
-  @apply max-w-[1150px] w-full;
-  @apply border border-solid border-[#d6d9dc];
-  @apply p-6;
-  @apply box-border;
+  @apply w-full;
+  @apply flex flex-row;
+  @apply justify-between;
 }

@@ -1,9 +1,13 @@
 import React from 'react'
-import styles from './qGlossary.module.scss'
+import Question from './Question'
 
-const QuestionList = () => {
+const QuestionList = ({questionsList}) => {
   return (
-    <div>QuestionList</div>
+    <div>
+      {questionsList.map((question) => (
+        <Question question={question} key={question.id}/>
+      ))}
+    </div>
   )
 }
 

@@ -40,12 +40,12 @@
 /*********************************************************************************************/
 
 .tagContainer{
-    @apply border border-solid border-[#DCDFE1] rounded-md;
-    @apply mt-4 text-xs;
+    @apply border border-solid border-search-input-color rounded-md;
+    @apply my-4 text-xs;
     h4{
         @apply p-2 px-4;
         @apply font-medium bg-[#F9FAFA];
-        @apply  rounded-t-md border-b border-solid border-[#DCDFE1] ;
+        @apply  rounded-t-md border-b border-solid border-search-input-color ;
     }
 }
 

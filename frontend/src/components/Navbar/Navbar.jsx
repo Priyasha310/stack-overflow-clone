@@ -31,12 +31,12 @@ const Navbar = () => {
           {user === null ?(
             <Link to="/Auth"  className={`${styles.navItem} ${styles.navBtn}`} >Log In</Link>
           ):(
-            <>
+            <div className={styles.user}>
               <Avatar backgroundColor='#009dff' px='10px' py='5px' borderRadius='50%' >
                 <Link to='/Auth'>M</Link>
               </Avatar>
               <button className={`${styles.navItem} ${styles.navBtn}`} >Log out</button>
-            </>
+            </div>
           )}
             
         </div>

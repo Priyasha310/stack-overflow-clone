@@ -25,10 +25,10 @@ const LeftSideBar = () => {
               <p>Questions</p>
             </NavLink>
 
-            <NavLink to='/' className={`${styles.sideNavLinks} ${isActive === 'Tags'?styles.active:''}`} 
+            <NavLink to='/Tags' className={`${styles.sideNavLinks} ${isActive === 'Tags'?styles.active:''}`} 
             onClick={()=>setIsActive('Tags')}><p className='pl-5'>Tags</p></NavLink>
             
-            <NavLink to='/' className={`${styles.sideNavLinks} ${isActive === 'Users'?styles.active:''}`} onClick={()=>setIsActive('Users')}>            
+            <NavLink to='/Users' className={`${styles.sideNavLinks} ${isActive === 'Users'?styles.active:''}`} onClick={()=>setIsActive('Users')}>            
             <p className='pl-5'>Users</p></NavLink>
             
             <NavLink to='/' className={`${styles.sideNavLinks} ${isActive === 'Companies'?styles.active:''}`} onClick={()=>setIsActive('Companies')}>            
