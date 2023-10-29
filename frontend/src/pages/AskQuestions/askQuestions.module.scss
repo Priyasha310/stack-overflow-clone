@@ -1,0 +1,70 @@
+.ask{
+    @apply pt-12 w-85_100 mx-auto;
+
+    h1{
+        @apply font-bold text-2xl;
+    }
+}
+
+.instructions{
+    @apply border border-solid border-link-color rounded-md;
+    @apply bg-blue-50 py-4 px-6 font-normal mt-12;
+    @apply w-70_100;
+
+    h2{
+        @apply text-lg font-normal pb-2;
+    }
+
+    h6{
+        @apply text-sm text-faint-black;
+
+        span{
+            @apply text-link-color;
+        }
+    }
+
+    p{
+        @apply text-xs font-medium pt-4 pb-2;
+    }
+
+    li{
+        @apply pl-4 text-xs text-faint-black;
+    }
+}
+
+.title{
+    @apply border border-solid border-faint-gray rounded-md;
+    @apply py-4 px-6 font-normal mt-4 bg-white;
+    @apply w-70_100;
+
+    h5{
+        @apply font-bold text-sm text-faint-black pt-2;
+    }
+
+    p{
+        @apply text-[10px] text-faint-black pb-1;
+    }
+}
+
+
+form{
+    @apply flex flex-col;
+
+    input{
+        @apply my-1 w-full;
+        @apply text-xs p-[6px] border border-solid border-faint-gray rounded;
+    }
+
+    input:focus{
+        @apply outline-none;
+        @apply border border-solid border-link-color;
+        @apply shadow-sm shadow-blue-300;
+    }
+
+    button{
+        @apply rounded-md my-1 w-fit;
+        @apply text-white text-xs p-2;
+        @apply border border-solid border-link-color;
+    }
+
+}

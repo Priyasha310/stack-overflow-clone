@@ -29,7 +29,7 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-[#e3e6e8];
+  @apply bg-faint-gray;
   width: 0.1rem;
   border-radius: 1rem;
 }
