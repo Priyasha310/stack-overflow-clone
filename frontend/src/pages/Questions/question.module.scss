@@ -1,0 +1,79 @@
+
+.displayPage{
+  @apply pt-12 w-70_100 min-h-screen pb-4;
+
+  .questionTitle{
+    @apply text-2xl font-normal text-faint-black pl-8;
+  }
+}
+
+.questions{
+  @apply flex flex-row gap-4 items-center;
+  @apply ml-8;
+
+}
+
+.count{
+  @apply text-black text-xl font-medium w-10;
+  @apply flex flex-col justify-center items-center mt-4;
+
+  p{
+    @apply text-center text-lg;
+  }
+
+  img{
+    @apply w-9 h-9;
+    @apply border border-solid border-faint-gray rounded-full;
+  }
+
+  :first-child{
+    @apply pt-2;
+  }
+  :last-child{
+    @apply pb-2;
+  }
+}
+
+.questionBody{
+  @apply w-full;
+}
+.tags{
+  @apply w-full flex items-center justify-between;
+  @apply text-[10px] text-light-gray;
+
+  .tag{
+      @apply m-1 text-xs p-1 px-[6px] rounded;
+      @apply text-link-color bg-blue-100;
+  }
+}
+
+.sharePosted{
+  @apply flex justify-between items-center;
+  @apply w-90_100 ml-10_100;
+
+  button{
+    @apply text-xs text-light-gray pl-4;
+  }
+
+  .user{
+    @apply text-xs;
+  }
+}
+
+.postAns{
+  @apply bg-yellow-100 w-90_100 mx-auto;
+
+  h1{
+    @apply font-medium;
+  }
+
+  textarea{
+    @apply border border-solid border-faint-gray rounded;
+    @apply w-full h-48 my-2;
+  }
+}
+
+.showAns{
+  @apply w-90_100 mx-auto my-2;
+
+}
