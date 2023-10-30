@@ -22,6 +22,7 @@
   }
 
   img{
+    @apply hover:cursor-pointer hover:bg-pink-100;
     @apply w-9 h-9;
     @apply border border-solid border-faint-gray rounded-full;
   }
@@ -42,7 +43,7 @@
   @apply text-[10px] text-light-gray;
 
   .tag{
-      @apply m-1 text-xs p-1 px-[6px] rounded;
+      @apply m-1 text-[10px] py-1 px-[6px] rounded;
       @apply text-link-color bg-blue-100;
   }
 }
@@ -52,7 +53,7 @@
   @apply w-90_100 ml-10_100;
 
   button{
-    @apply text-xs text-light-gray pl-4;
+    @apply text-xs text-light-gray pl-4 hover:text-black;
   }
 
   .user{
@@ -61,7 +62,7 @@
 }
 
 .postAns{
-  @apply bg-yellow-100 w-90_100 mx-auto;
+  @apply w-90_100 mx-auto;
 
   h1{
     @apply font-medium;
@@ -74,6 +75,6 @@
 }
 
 .showAns{
-  @apply w-90_100 mx-auto my-2;
+  @apply w-full mx-auto my-2;
 
 }

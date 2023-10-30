@@ -9,7 +9,7 @@ const Question = ({question, key}) => {
         <div className={styles.questions}>
           <div className={styles.count}>
             <p>{question.upVotes}-{question.downVotes} votes</p>
-            <p>{question.noOfAnswers} answers</p>
+            <p>{question.answer.length} answers</p>
             <p>{question.views} views</p>
           </div>
           <div className={styles.questionTitle}>

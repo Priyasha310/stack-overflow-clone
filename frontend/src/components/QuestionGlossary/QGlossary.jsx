@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from './qGlossary.module.scss'
 import QuestionList from './QList';
+import loader from '../../assets/loader.gif'
 
 const QGlossary = () => {
   
@@ -20,82 +21,94 @@ const QGlossary = () => {
 
   var questionsList = [
     {
-    id:1,
-    userId:1,
-    upVotes:2,
-    downVotes: 3,
-    noOfAnswers:2,
-    views:20,
-    questionTitle: "How to /convert unicode text to readable text",
-    qBody: "",
-    qTags: ['java', 'nodejs', 'reactjs',],
-    userPosted: 'Priyasha',
-    askedOn: 'jan 1 2023',
-    answer: [{
-      answerBody: "Answer",
-      userAnswered: "Priyasha",
-      'answeredOn': "Jan 10 2023",
-      'userId':2,
-    }]
-  },
+        _id:1,
+        userId:1,
+        upVotes:2,
+        downVotes: 3,
+        noOfAnswers:2,
+        questionTitle: " convert unicode text",
+        qBody: "How to convert unicode text to readable text",
+        qTags: ['java', 'nodejs', 'reactjs',],
+        userPosted: 'Anonymous',
+        askedOn: 'jan 1 2023',
+        answer: [{
+          answerBody: "Answer for 1st question of unicode",
+          userAnswered: "Priyasha",
+          'answeredOn': "feb 20 2023",
+          'userId':2,
+          upVotes:10,
+          downVotes: 3,
+        },{
+          answerBody: "Answer v2",
+          userAnswered: "Priyasha",
+          'answeredOn': "Jan 10 2023",
+          'userId':2,
+          upVotes:10,
+          downVotes: 3,
+        },
+      ]
+    },
     {
-    id:2,
-    userId:1,
-    upVotes:2,
-    downVotes: 3,
-    noOfAnswers:2,
-    views:20,
-    questionTitle: "Can't find stylesheet to import",
-    qBody: "",
-    qTags: ['java', 'nodejs', 'reactjs',],
-    userPosted: 'Parnavi',
-    askedOn: 'jan 1 2023',
-    answer: [{
-      answerBody: "Answer",
-      userAnswered: "Priyasha",
-      'answeredOn': "Jan 10 2023",
-      'userId':2,
-    }]
-  },
+        _id:2,
+        userId:1,
+        upVotes:2,
+        downVotes: 3,
+        noOfAnswers:2,
+        questionTitle: "Can't find stylesheet to import",
+        qBody: "",
+        qTags: ['java', 'nodejs', 'reactjs',],
+        userPosted: 'Parnavi',
+        askedOn: 'jan 1 2023',
+        answer: [{
+          answerBody: "Answer",
+          userAnswered: "Priyasha",
+          'answeredOn': "Jan 10 2023",
+          'userId':2,
+          upVotes:2,
+          downVotes: 3,
+        }]
+    },
     {
-    id:3,
-    userId:1,
-    upVotes:20,
-    downVotes: 3,
-    noOfAnswers:2,
-    views:20,
-    questionTitle: "TS2504: Type 'ReadableStream<Uint8Array>' must have a '[Symbol.asyncIterator]()' method that returns an async iterator ",
-    qBody: "",
-    qTags: ['java', 'nodejs', 'reactjs',],
-    userPosted: 'Ritu',
-    askedOn: 'jan 1 2023',
-    answer: [{
-      answerBody: "Answer",
-      userAnswered: "Priyasha",
-      'answeredOn': "Jan 10 2023",
-      'userId':2,
-    }]
-  },
+        _id:3,
+        userId:1,
+        upVotes:20,
+        downVotes: 3,
+        noOfAnswers:2,
+        questionTitle: "TS2504: Type 'ReadableStream<Uint8Array>' must have a '[Symbol.asyncIterator]()' method that returns an async iterator ",
+        qBody: "",
+        qTags: ['java', 'nodejs', 'reactjs',],
+        userPosted: 'Ritu',
+        askedOn: 'jan 1 2023',
+        answer: [{
+          answerBody: "Answer",
+          userAnswered: "Priyasha",
+          'answeredOn': "Jan 10 2023",
+          'userId':2,
+          upVotes:2,
+          downVotes: 3,
+        }]
+    },
     {
-    id:4,
-    userId:1,
-    upVotes:20,
-    downVotes: 3,
-    noOfAnswers:2,
-    views:20,
-    questionTitle: "Docker does not start when using swagger-ui image in docker",
-    qBody: "",
-    qTags: ['java', 'nodejs', 'reactjs',],
-    userPosted: 'Varsha',
-    askedOn: 'jan 1 2023',
-    answer: [{
-      answerBody: "Answer",
-      userAnswered: "Priyasha",
-      'answeredOn': "Jan 10 2023",
-      'userId':2,
-    }]
-  },
-]
+        _id:4,
+        userId:1,
+        upVotes:20,
+        downVotes: 3,
+        noOfAnswers:2,
+        questionTitle: "Docker does not start when using swagger-ui image in docker",
+        qBody: "",
+        qTags: ['java', 'nodejs', 'reactjs',],
+        userPosted: 'Varsha',
+        askedOn: 'jan 1 2023',
+        answer: [{
+          answerBody: "Answer",
+          userAnswered: "Priyasha",
+          'answeredOn': "Jan 10 2023",
+          'userId':2,
+          upVotes:2,
+          downVotes: 3,
+        }]
+    },
+  ]
 
   return (
     <div className={styles.qContainer}>
@@ -117,9 +130,7 @@ const QGlossary = () => {
 
       <hr className='my-4'/>
       <div>
-        {questionsList === null?(
-        <h1>d</h1>
-        ):(
+        {questionsList === null?(<img src={loader} alt='loading'/>):(
           <>
             <QuestionList questionsList={questionsList}/>
           </>
