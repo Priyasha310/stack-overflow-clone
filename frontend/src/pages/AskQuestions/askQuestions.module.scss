@@ -65,6 +65,7 @@ form{
         @apply rounded-md my-1 w-fit;
         @apply text-white text-xs p-2;
         @apply border border-solid border-link-color;
+        @apply duration-75 hover:bg-blue-600;
     }
 
 }

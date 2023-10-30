@@ -15,6 +15,7 @@
     button{
         @apply bg-link-color text-white text-xs;
         @apply p-2 rounded-md mb-4;
+        @apply duration-75 hover:bg-blue-600;
     }
 }
 

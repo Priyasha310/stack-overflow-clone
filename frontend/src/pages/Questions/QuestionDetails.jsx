@@ -189,7 +189,7 @@ const QuestionDetails = () => {
               <label htmlFor='answer-question'>
                 <textarea id='answer-question' />
               </label>
-              <button className='bg-link-color'type='submit'>Post Your Answer</button>
+              <button type='submit'>Post Your Answer</button>
             </form>
           </section>
           

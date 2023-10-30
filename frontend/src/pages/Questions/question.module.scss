@@ -53,7 +53,7 @@
   @apply w-90_100 ml-10_100;
 
   button{
-    @apply text-xs text-light-gray pl-4 hover:text-black;
+    @apply text-xs text-light-gray pl-4 duration-75 hover:text-black;
   }
 
   .user{
@@ -71,6 +71,12 @@
   textarea{
     @apply border border-solid border-faint-gray rounded;
     @apply w-full h-48 my-2;
+    resize: vertical;
+  }
+
+  button{    
+    @apply bg-link-color;
+    @apply duration-75 hover:bg-blue-600;
   }
 }
 

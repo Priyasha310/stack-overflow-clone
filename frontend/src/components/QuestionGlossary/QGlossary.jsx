@@ -118,7 +118,7 @@ const QGlossary = () => {
         ) : (
           <h4>All Questions</h4>
         )}
-        <button className={styles.askBtn} type='submit' onClick={checkAuth}>Ask Question</button>
+        <button type='submit' onClick={checkAuth}>Ask Question</button>
       </div>
       <div className={styles.filter}>
         <p>Interesting</p>

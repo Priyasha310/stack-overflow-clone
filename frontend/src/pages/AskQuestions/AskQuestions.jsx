@@ -41,7 +41,7 @@ const AskQuestions = () => {
                         </label>
 
 
-                        <button className='bg-link-color'type='submit'>Review your questions</button>
+                        <button className='bg-link-color'type='submit'>Post your question</button>
                     </form>
                 </div>
             </div>
