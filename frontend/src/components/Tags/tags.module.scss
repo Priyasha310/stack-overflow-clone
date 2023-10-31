@@ -1,0 +1,33 @@
+.tagsContainer{
+    @apply mt-8 w-full ml-8;
+    
+    h1{
+        @apply text-2xl pb-4;
+    }
+
+    p{
+        @apply text-sm mb-3;
+    }
+}
+
+.tagListContainer{
+    @apply w-full;
+    @apply grid;
+    grid-template-columns: repeat(auto-fit, minmax(224px, 240px));
+}
+
+.tag{
+    @apply m-2 p-2 ml-0;
+    @apply w-56;
+    @apply border border-solid border-faint-gray rounded-md;
+
+    span{
+        @apply text-[10px] p-1;
+        @apply bg-blue-50 text-link-color rounded;
+    }
+
+    p{
+        @apply my-2;
+        @apply text-xs text-faint-black;
+    }
+}
