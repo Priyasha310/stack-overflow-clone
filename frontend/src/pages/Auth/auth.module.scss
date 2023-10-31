@@ -72,9 +72,8 @@
 }
 
 .authBtn{
-    @apply mt-2 py-2 px-1  rounded-md;
+    @apply mt-2 py-2 px-6  rounded-md;
     @apply bg-link-color cursor-pointer;
-    @apply border-solid border border-link-color;
     @apply text-sm text-white;
     transition: 0.2s;
     font-weight: 500;

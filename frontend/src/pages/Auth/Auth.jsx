@@ -6,27 +6,55 @@ import styles from './auth.module.scss'
 const Auth = () => {
 
   const [isSignup, setIsSignup] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nameError, setNameError] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  
   const handleSwitch = ()=>{
     setIsSignup(!isSignup);
+    setName("");
+    setEmail("");
+    setPassword("");
   }
 
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
+
+    if (!email) {
+      setEmailError('Email cannot be empty');
+    }
+    if (!password) {
+      setPasswordError('Password cannot be empty');
+    }
+    if (isSignup) {
+      if (!name) {
+        setNameError('Name cannot be empty');
+      };
+    } else {
+    }
+  } 
   return (
     <section className={styles.authSection}>
       {isSignup && <AboutAuth/>}
       <div className={styles.authContainer}>
         {!isSignup && 
         <img src={icon} alt='stack overflow' className={styles.loginLogo}></img>}
-        <form>
+        <form onSubmit={handleSubmit}>
           {
             isSignup && 
               <label htmlFor='name'>
                 <h4>Display name</h4>
-                <input className={styles.input} type='text' name='name' id='name'/> 
+                <input className={styles.input} type='text' name='name' id='name' value={name} onChange={e=>setName(e.target.value)}/>
+                <span className='text-error-red text-[10px] py-0 font-normal'>{nameError}</span> 
               </label>
           }
           <label htmlFor='email'>
             <h4>Email</h4>
-            <input className={styles.input} type='email' name='email' id='email'/> 
+            <input className={styles.input} type='email' name='email' id='email' value={email} onChange={e=>setEmail(e.target.value)}/> 
+            <span className='text-error-red text-[10px] py-0 font-normal'>{emailError}</span>
           </label>
           <label htmlFor='password'>
             <div className='flex justify-between'>
@@ -35,7 +63,8 @@ const Auth = () => {
                 <h4 className='text-link-color text-xs font-normal'>Forgot Password?</h4>
               }
             </div>
-            <input className={styles.input} type='password' name='Password' id='Password'/> 
+            <input className={styles.input} type='password' name='Password' id='Password' value={password} onChange={e=>setPassword(e.target.value)}/> 
+            <span className='text-error-red text-[10px] py-0 font-normal'>{passwordError}</span>
             {isSignup && 
               <p className='font-normal pt-1'>Passwords must contain at least eight characters, including at least 1 letter and 1 number.</p>
             }

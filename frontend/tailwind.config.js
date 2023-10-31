@@ -38,6 +38,7 @@ module.exports = {
         'avatar-bg': '#009dff',
         'light-gray': '#666767',
         'faint-gray':'#e3e6e8',
+        'error-red':'#c83232',
         'search-input-color': '#0000003e',
         'text-color': '#3b4045',
         'orange': '#f9ebc8',
