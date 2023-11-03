@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from './qGlossary.module.scss'
 import QuestionList from './QList';
@@ -6,17 +6,38 @@ import loader from '../../assets/loader.gif'
 
 const QGlossary = () => {
   
-  const location = useLocation();
-  const user = 1;
+  const location = useLocation();  
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    if (!localStorage.getItem('user_data')) {
+      navigate('/auth') 
+    }
+    setIsLoading(false) 
+  },[isLoading, navigate]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (localStorage.getItem('user_data')) {
+        const userData = await JSON.parse(localStorage.getItem("user_data"))
+        setCurrentUser(userData);
+        console.log("User data found in local storage:", userData); 
+        console.log("CURRENT USER ", currentUser);
+      }
+    }
+    fetchData();
+  }, []);
 
   const checkAuth = ()=>{
-      if(user === null){
-        alert("You need to login to ask a question");
-        navigate('/auth');
-      }else{
-        navigate('/question/ask')
-      }
+    if(currentUser === null){
+      console.log("You need to login to ask a question");
+      navigate('/auth');
+    }else{
+      console.log("routing........");
+      navigate('/questions/ask')
+    }
   }
 
   var questionsList = [
@@ -26,9 +47,9 @@ const QGlossary = () => {
         upVotes:2,
         downVotes: 3,
         noOfAnswers:2,
-        questionTitle: " convert unicode text",
-        qBody: "How to convert unicode text to readable text",
-        qTags: ['java', 'nodejs', 'reactjs',],
+        questionTitle: "convert unicode text",
+        questionBody: "How to convert unicode text to readable text",
+        questionTags: ['java', 'nodejs', 'reactjs',],
         userPosted: 'Anonymous',
         askedOn: 'jan 1 2023',
         answer: [{
@@ -55,8 +76,8 @@ const QGlossary = () => {
         downVotes: 3,
         noOfAnswers:2,
         questionTitle: "Can't find stylesheet to import",
-        qBody: "",
-        qTags: ['java', 'nodejs', 'reactjs',],
+        questionBody: "",
+        questionTags: ['java', 'nodejs', 'reactjs',],
         userPosted: 'Parnavi',
         askedOn: 'jan 1 2023',
         answer: [{
@@ -75,8 +96,8 @@ const QGlossary = () => {
         downVotes: 3,
         noOfAnswers:2,
         questionTitle: "TS2504: Type 'ReadableStream<Uint8Array>' must have a '[Symbol.asyncIterator]()' method that returns an async iterator ",
-        qBody: "",
-        qTags: ['java', 'nodejs', 'reactjs',],
+        questionBody: "",
+        questionTags: ['java', 'nodejs', 'reactjs',],
         userPosted: 'Ritu',
         askedOn: 'jan 1 2023',
         answer: [{
@@ -95,8 +116,8 @@ const QGlossary = () => {
         downVotes: 3,
         noOfAnswers:2,
         questionTitle: "Docker does not start when using swagger-ui image in docker",
-        qBody: "",
-        qTags: ['java', 'nodejs', 'reactjs',],
+        questionBody: "",
+        questionTags: ['java', 'nodejs', 'reactjs',],
         userPosted: 'Varsha',
         askedOn: 'jan 1 2023',
         answer: [{

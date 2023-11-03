@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, {useState } from 'react'
+import styles from './auth.module.scss'
+import { useNavigate } from 'react-router-dom';
+import { signupRoute, loginRoute } from 'utils/APIRoutes';
 import icon from '../../assets/icon.png'
 import AboutAuth from './AboutAuth';
-import styles from './auth.module.scss'
+import axios from 'axios';
 
 const Auth = () => {
 
@@ -12,7 +15,9 @@ const Auth = () => {
   const [nameError, setNameError] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  
+
+  const navigate = useNavigate();
+    
   const handleSwitch = ()=>{
     setIsSignup(!isSignup);
     setName("");
@@ -20,22 +25,84 @@ const Auth = () => {
     setPassword("");
   }
 
-  const handleSubmit = async (e)=>{
-    e.preventDefault();
+  const handleValidation = () => {
+    let isValid = true;
 
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!email) {
       setEmailError('Email cannot be empty');
+      isValid = false;
+    }else if(!emailRegex.test(email)) {
+      setEmailError('Enter valid email');
+      isValid = false;
     }
     if (!password) {
       setPasswordError('Password cannot be empty');
+      isValid = false;
     }
     if (isSignup) {
       if (!name) {
         setNameError('Name cannot be empty');
+        isValid = false;
       };
-    } else {
+    }
+    return isValid;
+  }
+
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
+    if(handleValidation){
+          
+      if(isSignup){
+        const {data} = await axios.post(signupRoute, 
+          {name, email, password},
+        );
+        if (data.status === false) {
+            setPasswordError(data.msg);
+        }
+        if (data.status === true) {
+          localStorage.setItem(
+          'user_data',
+          JSON.stringify(data.user)
+          );
+          navigate("/");
+        }        
+      }
+      else{
+        const {data} = await axios.post(loginRoute, 
+          {email, password},
+        );
+        if (data.status === false) {
+            setPasswordError(data.msg);
+        }
+        if (data.status === true) {
+          localStorage.setItem(
+          'user_data',
+          JSON.stringify(data.user)
+          );
+          navigate("/");
+        }
+      }
+
+      
     }
   } 
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (!email && !password) {
+  //     alert("Enter email and password");
+  //   }
+  //   if (isSignup) {
+  //     if (!name) {
+  //       alert("Enter a name to continue");
+  //     }
+  //     dispatch(signup({ name, email, password }, navigate));
+  //   } else {
+  //     dispatch(login({ email, password }, navigate));
+  //   }
+  // };
+
   return (
     <section className={styles.authSection}>
       {isSignup && <AboutAuth/>}
@@ -97,4 +164,4 @@ const Auth = () => {
   )
 }
 
-export default Auth
+export default Auth;

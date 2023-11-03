@@ -16,7 +16,7 @@ const RoutesComponent = () => {
           <Route path='/questions' element={<Questions/>} />
           <Route path='/tags' element={<Tags/>} />
           <Route path='/questions/:id' element={<DisplayQuestion/>} />
-          <Route path='/question/ask' element={<AskQuestions/>} />
+          <Route path='/questions/ask' element={<AskQuestions/>} />
       </Routes>
   )
 }

@@ -28,8 +28,8 @@ const QuestionDetails = () => {
         downVotes: 3,
         noOfAnswers:2,
         questionTitle: " convert unicode text",
-        qBody: "How to convert unicode text to readable text",
-        qTags: ['java', 'nodejs', 'reactjs',],
+        questionBody: "How to convert unicode text to readable text",
+        questionTags: ['java', 'nodejs', 'reactjs',],
         userPosted: 'Anonymous',
         askedOn: 'jan 1 2023',
         answer: [{
@@ -56,8 +56,8 @@ const QuestionDetails = () => {
         downVotes: 3,
         noOfAnswers:2,
         questionTitle: "Can't find stylesheet to import",
-        qBody: "",
-        qTags: ['java', 'nodejs', 'reactjs',],
+        questionBody: "",
+        questionTags: ['java', 'nodejs', 'reactjs',],
         userPosted: 'Parnavi',
         askedOn: 'jan 1 2023',
         answer: [{
@@ -76,8 +76,8 @@ const QuestionDetails = () => {
         downVotes: 3,
         noOfAnswers:2,
         questionTitle: "TS2504: Type 'ReadableStream<Uint8Array>' must have a '[Symbol.asyncIterator]()' method that returns an async iterator ",
-        qBody: "",
-        qTags: ['java', 'nodejs', 'reactjs',],
+        questionBody: "",
+        questionTags: ['java', 'nodejs', 'reactjs',],
         userPosted: 'Ritu',
         askedOn: 'jan 1 2023',
         answer: [{
@@ -96,8 +96,8 @@ const QuestionDetails = () => {
         downVotes: 3,
         noOfAnswers:2,
         questionTitle: "Docker does not start when using swagger-ui image in docker",
-        qBody: "",
-        qTags: ['java', 'nodejs', 'reactjs',],
+        questionBody: "",
+        questionTags: ['java', 'nodejs', 'reactjs',],
         userPosted: 'Varsha',
         askedOn: 'jan 1 2023',
         answer: [{
@@ -115,7 +115,7 @@ const QuestionDetails = () => {
     <div className={styles.displayPage}>
       {questionsList === null?(<img src={loader} alt='loading'/>):(
       <>
-      {questionsList.filter(question => question._id == id).map(question => (
+      {questionsList.filter(question => question._id === id).map(question => (
         <div key={question._id}>
           <section>
             <h1 className={styles.questionTitle}>{question.questionTitle}</h1>
@@ -127,11 +127,11 @@ const QuestionDetails = () => {
                 <img src={voteDown} alt='vote-down'/>
               </div>
               <div className={styles.questionBody}>
-                <h5>{question.qBody}</h5>
+                <h5>{question.questionBody}</h5>
                 <div className={styles.tags}>
                   <div className='flex flex-row'>
                     {
-                      question.qTags.map((tag)=> (
+                      question.questionTags.map((tag)=> (
                         <p className={styles.tag} key={tag}>{tag}</p>
                       ))
                     }

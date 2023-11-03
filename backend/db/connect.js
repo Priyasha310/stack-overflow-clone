@@ -9,7 +9,7 @@ const connectDB = (url) => mongoose
     console.log("DB Connetion Successfull");
   })
   .catch((err) => {
-    console.log(err.message);
+    console.log("DB Connetion unsuccessfull", err.message);
   });
 
 module.exports = connectDB

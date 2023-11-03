@@ -17,7 +17,7 @@ const Question = ({question, key}) => {
             <div className={styles.timeStamp}>
               <div className='flex flex-row'>
               {
-                question.qTags.map((tag)=> (
+                question.questionTags.map((tag)=> (
                   <p className={styles.tag} key={tag}>{tag}</p>
                 ))
               }
