@@ -1,10 +1,12 @@
 import React, {useState } from 'react'
 import styles from './auth.module.scss'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import axios from 'axios';
 import { signupRoute, loginRoute } from 'utils/APIRoutes';
 import icon from '../../assets/icon.png'
 import AboutAuth from './AboutAuth';
-import axios from 'axios';
+import { signup, login } from '../../store/actions/authAction'
 
 const Auth = () => {
 
@@ -17,6 +19,7 @@ const Auth = () => {
   const [passwordError, setPasswordError] = useState('')
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
     
   const handleSwitch = ()=>{
     setIsSignup(!isSignup);
@@ -52,39 +55,26 @@ const Auth = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     if(handleValidation){
-          
       if(isSignup){
-        const {data} = await axios.post(signupRoute, 
-          {name, email, password},
-        );
+        const {data} = await axios.post(signupRoute, {name, email, password});
         if (data.status === false) {
-            setPasswordError(data.msg);
+          setPasswordError(data.msg);
         }
         if (data.status === true) {
-          localStorage.setItem(
-          'user_data',
-          JSON.stringify(data.user)
-          );
+          localStorage.setItem('user_data', JSON.stringify(data.user));
           navigate("/");
         }        
       }
       else{
-        const {data} = await axios.post(loginRoute, 
-          {email, password},
-        );
+        const {data} = await axios.post(loginRoute, {email, password});
         if (data.status === false) {
-            setPasswordError(data.msg);
+          setPasswordError(data.msg);
         }
         if (data.status === true) {
-          localStorage.setItem(
-          'user_data',
-          JSON.stringify(data.user)
-          );
+          localStorage.setItem('user_data', JSON.stringify(data.user));
           navigate("/");
         }
       }
-
-      
     }
   } 
 
@@ -130,7 +120,7 @@ const Auth = () => {
                 <h4 className='text-link-color text-xs font-normal'>Forgot Password?</h4>
               }
             </div>
-            <input className={styles.input} type='password' name='Password' id='Password' value={password} onChange={e=>setPassword(e.target.value)}/> 
+            <input className={styles.input} type='password' name='password' id='password' value={password} onChange={e=>setPassword(e.target.value)}/> 
             <span className='text-error-red text-[10px] py-0 font-normal'>{passwordError}</span>
             {isSignup && 
               <p className='font-normal pt-1'>Passwords must contain at least eight characters, including at least 1 letter and 1 number.</p>

@@ -50,12 +50,12 @@
 form{
     @apply flex flex-col;
 
-    input{
+    input, textarea{
         @apply my-1 w-full;
         @apply text-xs p-[6px] border border-solid border-faint-gray rounded;
     }
 
-    input:focus{
+    input:focus, textarea:focus{
         @apply outline-none;
         @apply border border-solid border-link-color;
         @apply shadow-sm shadow-blue-300;

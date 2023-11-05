@@ -99,7 +99,7 @@ const AskQuestions = () => {
                         <label htmlFor='ask-body'>   
                             <h5>What are the details of your problem?</h5>
                             <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
-                            <input id='ask-body' type='text' name='body' onChange={(e)=> {setQuestionBody(e.target.value)}} onKeyDown={handleKeyDown}/>
+                            <textarea id='ask-body' name='body' rows={10} onChange={(e)=> {setQuestionBody(e.target.value)}} onKeyDown={handleKeyDown}/>
                         </label>
 
                         <label htmlFor='ask-tags'>

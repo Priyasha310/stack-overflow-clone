@@ -24,19 +24,21 @@ const AskQuestion = async (req, res, next) => {
             .json({msg: "Couldn't post new question", status: false })
     }
 }
+
 const getAllQuestions = async (req, res, next) => {
     try{
-        const questionList = await Question.find();
-        res.status(200).json(questionList);
+        const questionsList = await Question.find();
+        res.status(200).json(questionsList);
     }catch(error){
         console.log(error);
         res.status(404).json({msg:res.msg})
     }
-
 }
+
 const deleteQuestion = (req, res, next) => {
 
 }
+
 const voteQuestion = (req, res, next) => {
 
 }

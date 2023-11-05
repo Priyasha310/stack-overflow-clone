@@ -8,9 +8,11 @@ app.use(cors());
 
 const authRouter = require('./routes/auth');
 const questionRouter = require('./routes/question');
+const answerRouter = require('./routes/answer');
 
 app.use('/user', authRouter)
 app.use('/questions', questionRouter)
+app.use('/answers', answerRouter)
 
 const connectDB = require('./db/connect');
 const port = process.env.port || 5000;

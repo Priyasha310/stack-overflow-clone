@@ -3,10 +3,10 @@ import styles from './qGlossary.module.scss'
 import { Link } from 'react-router-dom'
 import moment from "moment";
 
-const Question = ({question, key}) => {
+const Question = ({question}) => {
   return (
       <>
-        <div className={styles.questions}>
+        <div className={styles.questions} key={question._id}>
           <div className={styles.count}>
             <p>{question.upVotes - question.downVotes} votes</p>
             <p>{question.answer.length} answers</p>
