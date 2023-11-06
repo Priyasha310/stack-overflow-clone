@@ -3,7 +3,7 @@ const Question =  require('../models/question')
 const AskQuestion = async (req, res, next) => {
 
     try {
-        const {questionTitle, questionBody,  questionTags, currentUserName} = req.body;
+        const {questionTitle, questionBody,  questionTags, currentUserName, currentUserId} = req.body;
 
         if(!questionTitle || !questionBody || !questionTags ){
             return res.status(400).json({msg:'Please provide required information',  status: false })
@@ -12,8 +12,7 @@ const AskQuestion = async (req, res, next) => {
             return res.status(400).json({msg:'Must provide atleast 5 tags',  status: false })
         }
         
-        const question = await Question.create({...req.body, userPosted:currentUserName, userId: req.userId});
-        console.log("QUESTION ",question);
+        const question = await Question.create({...req.body, userPosted:currentUserName, userId: currentUserId});
         await question.save();
         res.status(200).json({msg:"posted a question successfully", status: true, question })
     } 

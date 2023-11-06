@@ -5,7 +5,7 @@ const QuestionList = ({questionsList}) => {
   return (
     <div>
       {questionsList.map((question) => (
-        <Question question={question} key={question.id}/>
+        <Question question={question} key={question._id}/>
       ))}
     </div>
   )

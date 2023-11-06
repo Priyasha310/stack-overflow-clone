@@ -10,27 +10,15 @@ const AskQuestions = () => {
     const [questionBody, setQuestionBody] = useState('')
     const [questionTags, setQuestionTags] = useState([])
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState(null);
+    const [currentUserId, setCurrentUserId] = useState(null);
     const [currentUserName, setCurrentUserName] = useState(null);
   
-    useEffect(() => {
-      if (localStorage.getItem('user_data')) {
-        const userData = JSON.parse(localStorage.getItem("user_data")||'null')
-        console.log("User data found in local storage:", userData);  
-      }
-      else{
-        console.log("User data found in local storage:", currentUser);        
-      }
-      setIsLoading(false) 
-    });
-
     useEffect(() => {
         const fetchData = async () => {
           if (localStorage.getItem('user_data')) {
             const userData = await JSON.parse(localStorage.getItem("user_data"))
-            setCurrentUser(userData);
-            console.log("User data found in local storage:", userData); 
+            setCurrentUser(userData); 
             console.log("CURRENT USER ", currentUser);
           }
         }
@@ -40,21 +28,18 @@ const AskQuestions = () => {
     useEffect(()=>{
         if(currentUser){
             setCurrentUserName(currentUser.name);
-            console.log("CURRENT USER NAME ",currentUserName);
+            setCurrentUserId(currentUser._id);
         }
-    },[currentUser, currentUserName])
+    },[currentUser, currentUserName, currentUserId])
 
     const handleSumbit = async (e) => {
         e.preventDefault();
-        console.log({questionTitle, questionBody, questionTags});
 
         const {data} = await axios.post(askQuestionRoute, 
-            {questionTitle, questionBody, questionTags, currentUserName},
+            {questionTitle, questionBody, questionTags, currentUserName, currentUserId},
         );
-        if (data.status === true) {
-            navigate("/");
-        }        
-
+        if (data.status === true) navigate("/");
+        
         setQuestionTitle("")
         setQuestionBody('')
         setQuestionTags([])
@@ -65,10 +50,6 @@ const AskQuestions = () => {
             e.preventDefault();
             setQuestionBody(questionBody + '\n');
         }
-        // if (e.key === "Enter"  && !e.shiftKey) {
-        //     e.preventDefault();
-        //     setQuestionBody(questionBody + '\n');
-        // }
     };
 
     return (

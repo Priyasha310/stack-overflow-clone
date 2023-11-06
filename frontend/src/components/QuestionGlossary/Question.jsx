@@ -13,7 +13,7 @@ const Question = ({question}) => {
             <p>{question.views} views</p>
           </div>
           <div className={styles.questionTitle}>
-            <Link to={`/questions/${question._id}`} className=''>{question.questionTitle}</Link>
+            <Link to={`/questions/${question._id}`} >{question.questionTitle}</Link>
             <div className={styles.timeStamp}>
               <div className='flex flex-row'>
               {

@@ -3,8 +3,7 @@ const Questions = require('../models/question');
 
 const postAnswer = async (req, res, next)=>{
     const {id: _id} = req.params;
-    const userId = req.userId;
-    const {noOfAnswers, answerBody, userAnswered} = req.body;
+    const {noOfAnswers, answerBody, userAnswered, userId} = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(_id)){
         return res.status(404).json({msg:'Question invalid..', status:false})

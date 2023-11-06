@@ -13,6 +13,8 @@ import { getQuestionRoute } from 'utils/APIRoutes'
 import axios from 'axios'
 
 const QuestionDetails = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUserId, setCurrentUserId] = useState(null);
   const [currentUserName, setCurrentUserName] = useState(null);
   const [questionsList, setQuestionsList] = useState([]);
   const [answer, setAnswer] = useState("");
@@ -21,20 +23,19 @@ const QuestionDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const url = "http://localhost:3000";
-  
-  const handleShare = () => {
-    copy(url + location.pathname);
-    alert("URL Copied");
-  };
 
   useEffect(() => {
     if (localStorage.getItem('user_data')) {
       const userData = JSON.parse(localStorage.getItem("user_data")||'null')
+      setCurrentUser(userData);
+      setCurrentUserId(userData._id);
       setCurrentUserName(userData.name);
-      console.log("User data found in local storage:", userData);  
+      console.log("User data found in local storage:", userData);
+      console.log("CURRENT USER: ", currentUser);  
     }
     else{
-      navigate('/')
+      console.log("You need to login to check question details.")
+      navigate('/auth')
     }
   }, [navigate]);
     
@@ -50,7 +51,11 @@ const QuestionDetails = () => {
     };
     fetchQuestions();
   }, []);
-
+    
+  const handleShare = () => {
+    copy(url + location.pathname);
+    alert("URL Copied");
+  };
 
   const handleSubmit = async (e, answerLength) => {
     e.preventDefault();
@@ -58,13 +63,13 @@ const QuestionDetails = () => {
       alert("Enter answer");
     }else{
       const {data} = await axios.patch(postAnswerRoute, {
-        noOfAnswers: answerLength + 1,
-          answerBody:answer, userAnswered:currentUserName
+        noOfAnswers: answerLength + 1, answerBody: answer, userAnswered: currentUserName, userId: currentUserId,
       });
       if(data.status === false) console.log("error setting answer");
       else{ 
         setAnswer(answer);
-        console.log("ANSWER SET");
+        // console.log("ANSWER SET");
+        setAnswer("");
       }; 
     }
   };
@@ -72,98 +77,6 @@ const QuestionDetails = () => {
   const host = 'http://localhost:5000'
   const generatePostAnswerRoute = (id) => `${host}/answers/post/${id}`;
   const postAnswerRoute = generatePostAnswerRoute(id);
-
-  // var questionsList = [
-  //   {
-  //       _id:1,
-  //       userId:1,
-  //       upVotes:2,
-  //       downVotes: 3,
-  //       noOfAnswers:2,
-  //       questionTitle: " convert unicode text",
-  //       questionBody: "How to convert unicode text to readable text",
-  //       questionTags: ['java', 'nodejs', 'reactjs',],
-  //       userPosted: 'Anonymous',
-  //       askedOn: 'jan 1 2023',
-  //       answer: [{
-  //         answerBody: "Answer for 1st question of unicode",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "feb 20 2023",
-  //         'userId':2,
-  //         upVotes:10,
-  //         downVotes: 3,
-  //       },{
-  //         answerBody: "Answer v1",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "Jan 10 2023",
-  //         'userId':2,
-  //         upVotes:5,
-  //         downVotes: 0,
-  //       },
-  //     ]
-  //   },
-  //   {
-  //       _id:2,
-  //       userId:1,
-  //       upVotes:2,
-  //       downVotes: 3,
-  //       noOfAnswers:2,
-  //       questionTitle: "Can't find stylesheet to import",
-  //       questionBody: "",
-  //       questionTags: ['java', 'nodejs', 'reactjs',],
-  //       userPosted: 'Parnavi',
-  //       askedOn: 'jan 1 2023',
-  //       answer: [{
-  //         answerBody: "Answer",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "Jan 10 2023",
-  //         'userId':2,
-  //         upVotes:2,
-  //         downVotes: 3,
-  //       }]
-  //   },
-  //   {
-  //       _id:3,
-  //       userId:1,
-  //       upVotes:20,
-  //       downVotes: 3,
-  //       noOfAnswers:2,
-  //       questionTitle: "TS2504: Type 'ReadableStream<Uint8Array>' must have a '[Symbol.asyncIterator]()' method that returns an async iterator ",
-  //       questionBody: "",
-  //       questionTags: ['java', 'nodejs', 'reactjs',],
-  //       userPosted: 'Ritu',
-  //       askedOn: 'jan 1 2023',
-  //       answer: [{
-  //         answerBody: "Answer",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "Jan 10 2023",
-  //         'userId':2,
-  //         upVotes:2,
-  //         downVotes: 3,
-  //       }]
-  //   },
-  //   {
-  //       _id:4,
-  //       userId:1,
-  //       upVotes:20,
-  //       downVotes: 3,
-  //       noOfAnswers:2,
-  //       questionTitle: "Docker does not start when using swagger-ui image in docker",
-  //       questionBody: "",
-  //       questionTags: ['java', 'nodejs', 'reactjs',],
-  //       userPosted: 'Varsha',
-  //       askedOn: 'jan 1 2023',
-  //       answer: [{
-  //         answerBody: "Answer",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "Jan 10 2023",
-  //         'userId':2,
-  //         upVotes:2,
-  //         downVotes: 3,
-  //       }]
-  //   },
-  // ]
-
 
   return (
     <div className={styles.displayPage}>
@@ -203,7 +116,12 @@ const QuestionDetails = () => {
             <div className={styles.sharePosted}>
               <div>
                 <button onClick={handleShare}>Share</button>
-                <button onClick={handleShare}>Delete</button>
+                {
+                  currentUser._id === question.userId && (
+                    <button onClick={(e)=>console.log(currentUser._id, question.userId)}>Delete</button> 
+                  )
+                }
+                
               </div>
               <div  className={styles.user}>
                 <p>asked {moment(question.askedOn).fromNow()}</p>
@@ -226,9 +144,8 @@ const QuestionDetails = () => {
 
           {question.answer.length !== 0 && (
             <section>
-              {/* <h3>{question.noOfAnswers} Answers</h3> */}
               <DisplayAnswers
-                key={question._id}
+                key={question.answer._id}
                 question={question}
                 handleShare={handleShare}
               />

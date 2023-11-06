@@ -14,7 +14,7 @@ const Navbar = () => {
     if (localStorage.getItem('user_data')) {
       const userData = JSON.parse(localStorage.getItem("user_data")||'null')
       setCurrentUser(userData);
-      console.log("User data found in local storage:", userData);  
+      // console.log("User data found in local storage:", userData);  
     }
   }, [navigate]);
 

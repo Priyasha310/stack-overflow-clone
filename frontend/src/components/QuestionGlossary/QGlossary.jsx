@@ -10,16 +10,8 @@ const QGlossary = () => {
   
   const location = useLocation();  
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const [questionsList, setQuestionsList] = useState(null);
-
-  useEffect(() => {
-    if (!localStorage.getItem('user_data')) {
-      navigate('/auth') 
-    }
-    setIsLoading(false) 
-  },[isLoading, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +19,7 @@ const QGlossary = () => {
         const userData = await JSON.parse(localStorage.getItem("user_data"))
         setCurrentUser(userData);
         console.log("User data found in local storage:", userData); 
-        console.log("CURRENT USER ", currentUser);
+        // console.log("CURRENT USER ", currentUser);
       }
     }
     fetchData();
@@ -40,7 +32,7 @@ const QGlossary = () => {
         setQuestionsList(response.data);
         console.log("RESPONSE TO FETCH QUESTIONS: ", response);
       } catch (error) {
-        console.error("Error fetching questions:", error);
+        console.error("Error fetching questions: ", error);
       }
     };
     fetchQuestions();
@@ -48,104 +40,13 @@ const QGlossary = () => {
 
   const checkAuth = ()=>{
     if(currentUser === null){
-      console.log("You need to login to ask a question");
+      // console.log("You need to login to ask a question");
       navigate('/auth');
     }else{
-      console.log("routing........");
+      // console.log("routing........");
       navigate('/questions/ask')
     }
   }
-
-  // var questionsList = [
-  //   {
-  //       _id:1,
-  //       userId:1,
-  //       upVotes:2,
-  //       downVotes: 3,
-  //       noOfAnswers:2,
-  //       questionTitle: "convert unicode text",
-  //       questionBody: "How to convert unicode text to readable text",
-  //       questionTags: ['java', 'nodejs', 'reactjs',],
-  //       userPosted: 'Anonymous',
-  //       askedOn: 'jan 1 2023',
-  //       answer: [{
-  //         answerBody: "Answer for 1st question of unicode",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "feb 20 2023",
-  //         'userId':2,
-  //         upVotes:10,
-  //         downVotes: 3,
-  //       },{
-  //         answerBody: "Answer v2",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "Jan 10 2023",
-  //         'userId':2,
-  //         upVotes:10,
-  //         downVotes: 3,
-  //       },
-  //     ]
-  //   },
-  //   {
-  //       _id:2,
-  //       userId:1,
-  //       upVotes:2,
-  //       downVotes: 3,
-  //       noOfAnswers:2,
-  //       questionTitle: "Can't find stylesheet to import",
-  //       questionBody: "",
-  //       questionTags: ['java', 'nodejs', 'reactjs',],
-  //       userPosted: 'Parnavi',
-  //       askedOn: 'jan 1 2023',
-  //       answer: [{
-  //         answerBody: "Answer",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "Jan 10 2023",
-  //         'userId':2,
-  //         upVotes:2,
-  //         downVotes: 3,
-  //       }]
-  //   },
-  //   {
-  //       _id:3,
-  //       userId:1,
-  //       upVotes:20,
-  //       downVotes: 3,
-  //       noOfAnswers:2,
-  //       questionTitle: "TS2504: Type 'ReadableStream<Uint8Array>' must have a '[Symbol.asyncIterator]()' method that returns an async iterator ",
-  //       questionBody: "",
-  //       questionTags: ['java', 'nodejs', 'reactjs',],
-  //       userPosted: 'Ritu',
-  //       askedOn: 'jan 1 2023',
-  //       answer: [{
-  //         answerBody: "Answer",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "Jan 10 2023",
-  //         'userId':2,
-  //         upVotes:2,
-  //         downVotes: 3,
-  //       }]
-  //   },
-  //   {
-  //       _id:4,
-  //       userId:1,
-  //       upVotes:20,
-  //       downVotes: 3,
-  //       noOfAnswers:2,
-  //       questionTitle: "Docker does not start when using swagger-ui image in docker",
-  //       questionBody: "",
-  //       questionTags: ['java', 'nodejs', 'reactjs',],
-  //       userPosted: 'Varsha',
-  //       askedOn: 'jan 1 2023',
-  //       answer: [{
-  //         answerBody: "Answer",
-  //         userAnswered: "Priyasha",
-  //         'answeredOn': "Jan 10 2023",
-  //         'userId':2,
-  //         upVotes:2,
-  //         downVotes: 3,
-  //       }]
-  //   },
-  // ]
 
   return (
     <div className={styles.qContainer}>
@@ -158,7 +59,7 @@ const QGlossary = () => {
         <button type='submit' onClick={checkAuth}>Ask Question</button>
       </div>
       <div className='flex flex-row'>
-        {questionsList &&  (<h1 className='w-full ml-7 mt-2'>{questionsList.length} {questionsList.length > 1? "questions": "question"}</h1>  )}
+        {questionsList ? (<h1 className='w-full ml-7 mt-2'>{questionsList.length} {questionsList.length > 1? "questions": "question"}</h1>  ): <h1 className='w-full ml-7 mt-2'>0 question</h1>}
         <div className={styles.filter}>
           <p>Interesting</p>
           <p>Bountied</p>
@@ -167,7 +68,6 @@ const QGlossary = () => {
           <p>Month</p>
         </div>
       </div>
-      {/* <h1 className='ml-8'>{questionsList.length} {questionsList.length > 1? "questions": "question"}</h1>  */}
         
       <hr className='mx-2 my-4'/>
       <div>
