@@ -26,6 +26,9 @@ const Auth = () => {
     setName("");
     setEmail("");
     setPassword("");
+    setNameError("");
+    setEmailError("");
+    setPasswordError("");
   }
 
   const handleValidation = () => {
@@ -54,7 +57,7 @@ const Auth = () => {
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
-    if(handleValidation){
+    if(handleValidation()){
       if(isSignup){
         const {data} = await axios.post(signupRoute, {name, email, password});
         if (data.status === false) {

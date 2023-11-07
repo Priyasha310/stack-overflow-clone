@@ -6,10 +6,14 @@ import { askQuestionRoute } from 'utils/APIRoutes'
 
 const AskQuestions = () => {
 
+    const navigate = useNavigate();
     const [questionTitle, setQuestionTitle] = useState('')
     const [questionBody, setQuestionBody] = useState('')
     const [questionTags, setQuestionTags] = useState([])
-    const navigate = useNavigate();
+    const [questionTitleError, setQuestionTitleError] = useState('')
+    const [questionBodyError, setQuestionBodyError] = useState('')
+    const [questionTagsError, setQuestionTagsError] = useState('')
+    
     const [currentUser, setCurrentUser] = useState(null);
     const [currentUserId, setCurrentUserId] = useState(null);
     const [currentUserName, setCurrentUserName] = useState(null);
@@ -19,7 +23,7 @@ const AskQuestions = () => {
           if (localStorage.getItem('user_data')) {
             const userData = await JSON.parse(localStorage.getItem("user_data"))
             setCurrentUser(userData); 
-            console.log("CURRENT USER ", currentUser);
+            // console.log("CURRENT USER ", currentUser);
           }
         }
         fetchData();
@@ -30,19 +34,44 @@ const AskQuestions = () => {
             setCurrentUserName(currentUser.name);
             setCurrentUserId(currentUser._id);
         }
-    },[currentUser, currentUserName, currentUserId])
+    },[currentUser])
+
+    const handleValidation = () => {
+        let isValid = true;
+    
+        if(!questionTitle){
+            setQuestionTitleError('Please enter required details.')
+            isValid = false;
+        }
+        if (questionBody.length < 20) {
+          setQuestionBodyError('Question body must be of minimum 20 characters.');
+          isValid = false;
+        }        
+        if (questionTags.length > 5) {
+            setQuestionTagsError('Maximum of 5 tags must be provided.');
+            isValid = false;
+        }
+        // else if(questionTags.every(tag => tag.length < 2)){
+        //     setQuestionTagsError('Each tag must be atleast 2 characters long.')
+        //     isValid = false;
+        // }        
+        return isValid;
+      }
 
     const handleSumbit = async (e) => {
         e.preventDefault();
-
-        const {data} = await axios.post(askQuestionRoute, 
-            {questionTitle, questionBody, questionTags, currentUserName, currentUserId},
-        );
-        if (data.status === true) navigate("/");
+        if(handleValidation()){
+            const {data} = await axios.post(askQuestionRoute, 
+                {questionTitle, questionBody, questionTags, currentUserName, currentUserId},
+            );
+            if (data.status === true) navigate("/");
+            
+            setQuestionTitle("")
+            setQuestionBody('')
+            setQuestionTags([])
+        }
         
-        setQuestionTitle("")
-        setQuestionBody('')
-        setQuestionTags([])
+        
     }
 
     const handleKeyDown = (e) => {
@@ -75,22 +104,25 @@ const AskQuestions = () => {
                             <h5>Title</h5>
                             <p>Be specific and imagine you’re asking a question to  another person.</p>
                             <input id='ask-title' type='text' name='title' placeholder='e.g. Is there an R function for finding the index of an element in a vector?'onChange={(e)=> {setQuestionTitle(e.target.value)}}/>
+                            <span className='text-error-red text-[10px]'>{questionTitleError}</span>
                         </label>
 
                         <label htmlFor='ask-body'>   
                             <h5>What are the details of your problem?</h5>
                             <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
                             <textarea id='ask-body' name='body' rows={10} onChange={(e)=> {setQuestionBody(e.target.value)}} onKeyDown={handleKeyDown}/>
+                            <span className='text-error-red text-[10px]'>{questionBodyError}</span>
                         </label>
 
                         <label htmlFor='ask-tags'>
                             <h5>Tags</h5>
-                            <p>Add up to 5 tags to describe what your question is about. Start typing to see suggestions.</p>
+                            <p>Add up to 5 tags to describe what your question is about. Make sure to provide only one space among tags and no space at end.</p>
                             <input id='ask-tags' type='text' name='tags' onChange={(e)=> {setQuestionTags(e.target.value.split(" "))}}/>
+                            <span className='text-error-red text-[10px]'>{questionTagsError}</span>
                         </label>
 
 
-                        <button className='bg-link-color'type='submit'>Post your question</button>
+                        <button className='bg-link-color' type='submit'>Post your question</button>
                     </form>
                 </div>
             </div>

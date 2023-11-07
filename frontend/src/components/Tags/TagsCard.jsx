@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './tags.module.scss'
 
-const TagsCard = ({tag}) => {
+const TagsCard = ({key, tag}) => {
   return (
-    <div className={styles.tag}>
-        <span>{tag.tagName}</span>
-        <p>{tag.tagDesc}</p>
+    <div className={styles.tag} key={key}>
+      <span>{tag.tagName}</span>
+      <p>{tag.tagDesc}</p>
     </div>
   )
 }

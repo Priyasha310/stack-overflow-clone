@@ -1,15 +1,18 @@
 const Question =  require('../models/question')
 
 const AskQuestion = async (req, res, next) => {
-
+    const {questionTitle, questionBody,  questionTags, currentUserName, currentUserId} = req.body;
+        
     try {
-        const {questionTitle, questionBody,  questionTags, currentUserName, currentUserId} = req.body;
 
         if(!questionTitle || !questionBody || !questionTags ){
             return res.status(400).json({msg:'Please provide required information',  status: false })
         }
-        if(questionTags.length < 5){
-            return res.status(400).json({msg:'Must provide atleast 5 tags',  status: false })
+        if(questionTags.length > 5){
+            return res.status(400).json({msg:'Must provide upto 5 tags',  status: false })
+        }
+        if(questionBody.length < 20){
+            return res.status(400).json({msg:'Details must be of 20 characters',  status: false })
         }
         
         const question = await Question.create({...req.body, userPosted:currentUserName, userId: currentUserId});

@@ -50,8 +50,12 @@
 form{
     @apply flex flex-col;
 
+    label{
+        @apply my-1;
+    }
+
     input, textarea{
-        @apply my-1 w-full;
+        @apply w-full;
         @apply text-xs p-[6px] border border-solid border-faint-gray rounded;
     }
 
