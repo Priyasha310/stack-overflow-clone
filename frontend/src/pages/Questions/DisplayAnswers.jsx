@@ -46,7 +46,7 @@ const DisplayAnswers = ({key, question, handleShare}) => {
           <p>{ans.upVotes - ans.downVotes}</p>
           <img src={voteDown} alt='vote-down'/>
         </div>
-        <div className={styles.questionBody}>
+        <div className={styles.answerBody}>
           <h5>{ans.answerBody}</h5>        
         </div>
       </div> 

@@ -36,8 +36,14 @@
 }
 
 .questionBody{
-  @apply w-full;
+  @apply w-full text-[13px];
+  @apply leading-5 whitespace-pre-line;
 }
+.answerBody{
+  @apply w-full text-sm;
+  @apply leading-5 whitespace-pre-line;
+}
+
 .tags{
   @apply w-full flex items-center justify-between;
   @apply text-[10px] text-light-gray;

@@ -18,6 +18,7 @@ const QuestionDetails = () => {
   const [currentUserName, setCurrentUserName] = useState(null);
   const [questionsList, setQuestionsList] = useState([]);
   const [answer, setAnswer] = useState("");
+  const [answerError, setAnswerError] = useState("");
 
   const {id} = useParams();
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const QuestionDetails = () => {
   const handleSubmit = async (e, answerLength) => {
     e.preventDefault();
     if(answer === ""){
-      alert("Enter answer");
+      setAnswerError("Enter your answer");
     }else{
       const {data} = await axios.patch(postAnswerRoute, {
         noOfAnswers: answerLength + 1, answerBody: answer, userAnswered: currentUserName, userId: currentUserId,
@@ -70,6 +71,7 @@ const QuestionDetails = () => {
         setAnswer(answer);
         // console.log("ANSWER SET");
         setAnswer("");
+        setAnswerError("");
       }; 
     }
   };
@@ -158,6 +160,7 @@ const QuestionDetails = () => {
             <form onSubmit = {(e) => {handleSubmit(e, question.answer.length)}}>
               <label htmlFor='answer-question'>
                 <textarea id='answer-question' name='answer' value={answer} onChange={(e)=>setAnswer(e.target.value)}  />
+                <span className='text-error-red text-[10px]'>{answerError}</span>
               </label>
               <button type='submit'>Post Your Answer</button>
             </form>

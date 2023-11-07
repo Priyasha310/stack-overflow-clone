@@ -1,7 +1,7 @@
 const  mongoose = require('mongoose');
 const Questions = require('../models/question');
 
-const postAnswer = async (req, res, next)=>{
+const postAnswer = async (req, res)=>{
     const {id: _id} = req.params;
     const {noOfAnswers, answerBody, userAnswered, userId} = req.body;
 
@@ -10,6 +10,7 @@ const postAnswer = async (req, res, next)=>{
     }
     updateNoOfQuestions(_id, noOfAnswers);
     try {
+        if(!answerBody) res.status(400).json({msg:'Enter answer to post', status:false});
         const updatedQuestion = await Questions.findByIdAndUpdate(_id, 
             {$addToSet: {'answer': [{answerBody, userAnswered, userId}]}});
         res
@@ -31,4 +32,6 @@ const updateNoOfQuestions = async(_id, noOfAnswers) => {
     }
 }
 
-module.exports = {postAnswer}
+const deleteAnswer = async(req, res) => {}
+
+module.exports = {postAnswer, deleteAnswer}
