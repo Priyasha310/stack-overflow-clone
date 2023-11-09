@@ -17,6 +17,7 @@ const AskQuestions = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [currentUserId, setCurrentUserId] = useState(null);
     const [currentUserName, setCurrentUserName] = useState(null);
+    const [makeTheLineVisible, setMakeTheLineVisible] = useState(false);
   
     useEffect(() => {
         const fetchData = async () => {
@@ -50,11 +51,7 @@ const AskQuestions = () => {
         if (questionTags.length > 5) {
             setQuestionTagsError('Maximum of 5 tags must be provided.');
             isValid = false;
-        }
-        // else if(questionTags.every(tag => tag.length < 2)){
-        //     setQuestionTagsError('Each tag must be atleast 2 characters long.')
-        //     isValid = false;
-        // }        
+        }      
         return isValid;
       }
 
@@ -75,9 +72,8 @@ const AskQuestions = () => {
     }
 
     const handleKeyDown = (e) => {
-        if (e.key === "Enter" ) {
-            e.preventDefault();
-            setQuestionBody(questionBody + '\n');
+        if (e.key === "Enter") {
+            setMakeTheLineVisible(true);
         }
     };
 

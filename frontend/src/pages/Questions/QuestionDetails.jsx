@@ -19,11 +19,13 @@ const QuestionDetails = () => {
   const [questionsList, setQuestionsList] = useState([]);
   const [answer, setAnswer] = useState("");
   const [answerError, setAnswerError] = useState("");
+  const [makeTheLineVisible, setMakeTheLineVisible] = useState(false);
 
   const {id} = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const url = "http://localhost:3000";
+  const host = 'http://localhost:5000'
 
   useEffect(() => {
     if (localStorage.getItem('user_data')) {
@@ -57,13 +59,32 @@ const QuestionDetails = () => {
     copy(url + location.pathname);
     alert("URL Copied");
   };
+  
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" ) {
+      setMakeTheLineVisible(true)
+    }
+  };
+
+  const handleDelete = async (e) => {
+    console.log("deleting question");
+    try {
+      const {data} = await axios.delete(`${host}/questions/delete/${id}`);
+      navigate('/');
+      if(data.status === true) {console.log("deleted question", data);}
+      else console.log("error deleting", data);
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
 
   const handleSubmit = async (e, answerLength) => {
     e.preventDefault();
     if(answer === ""){
       setAnswerError("Enter your answer");
     }else{
-      const {data} = await axios.patch(postAnswerRoute, {
+      const {data} = await axios.patch(`${host}/answers/post/${id}`, {
         noOfAnswers: answerLength + 1, answerBody: answer, userAnswered: currentUserName, userId: currentUserId,
       });
       if(data.status === false) console.log("error setting answer");
@@ -75,10 +96,6 @@ const QuestionDetails = () => {
       }; 
     }
   };
-
-  const host = 'http://localhost:5000'
-  const generatePostAnswerRoute = (id) => `${host}/answers/post/${id}`;
-  const postAnswerRoute = generatePostAnswerRoute(id);
 
   return (
     <div className={styles.displayPage}>
@@ -120,7 +137,7 @@ const QuestionDetails = () => {
                 <button onClick={handleShare}>Share</button>
                 {
                   currentUser._id === question.userId && (
-                    <button onClick={(e)=>console.log(currentUser._id, question.userId)}>Delete</button> 
+                    <button onClick={(e)=>handleDelete(e)}>Delete</button> 
                   )
                 }
                 
@@ -133,7 +150,7 @@ const QuestionDetails = () => {
                   style={{ color: "#0086d8" }}
                 >
                 <div className='flex flex-row gap-2 my-1'>
-                  <Avatar backgroundColor="orange" px="8px" py="4px" fontSize='14px' borderRadius="4px">
+                  <Avatar backgroundColor="orange" px="8px" py="4px" pt='' fontSize='14px' borderRadius="4px">
                     {question.userPosted?.charAt(0).toUpperCase()}
                   </Avatar>
                   <div>{question.userPosted}</div></div>
@@ -159,7 +176,7 @@ const QuestionDetails = () => {
             <h1>Your answer</h1>
             <form onSubmit = {(e) => {handleSubmit(e, question.answer.length)}}>
               <label htmlFor='answer-question'>
-                <textarea id='answer-question' name='answer' value={answer} onChange={(e)=>setAnswer(e.target.value)}  />
+                <textarea id='answer-question' name='answer' value={answer} onChange={(e)=>setAnswer(e.target.value)} onKeyDown={handleKeyDown}/>
                 <span className='text-error-red text-[10px]'>{answerError}</span>
               </label>
               <button type='submit'>Post Your Answer</button>

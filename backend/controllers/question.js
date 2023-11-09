@@ -37,8 +37,18 @@ const getAllQuestions = async (req, res, next) => {
     }
 }
 
-const deleteQuestion = (req, res, next) => {
-
+const deleteQuestion = async (req, res, next) => {
+    const {id: qId} = req.params;
+    const question = await Question.findOneAndDelete({_id: qId});
+    try{
+        if(!question){
+            return res.status(404).json({msg:`no question with id: ${qId}`, status:false})
+        }
+        res.status(200).json({msg:`question with id: ${qId} deleted`, status:true, question})
+    }catch(error){
+        console.log(error);
+    }
+    
 }
 
 const voteQuestion = (req, res, next) => {

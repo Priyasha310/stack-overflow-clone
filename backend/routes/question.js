@@ -6,7 +6,7 @@ const auth = require('../middleware/auth.js');
 router
     .post('/ask', AskQuestion)
     .get('/get', getAllQuestions)
-    .delete('/delete/:id', auth, deleteQuestion)
+    .delete('/delete/:id', deleteQuestion)
     .patch('/vote/:id', voteQuestion)
 
 module.exports = router;
