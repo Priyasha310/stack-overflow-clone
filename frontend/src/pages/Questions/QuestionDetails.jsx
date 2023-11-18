@@ -8,20 +8,23 @@ import moment from 'moment'
 import DisplayAnswers from './DisplayAnswers'
 import copy from 'copy-to-clipboard'
 import { useLocation } from 'react-router-dom'
-import loader from '../../assets/loader-unscreen.gif'
-import { getQuestionRoute } from 'utils/APIRoutes'
+// import loader from '../../assets/loader-unscreen.gif'
+// import { getQuestionRoute } from 'utils/APIRoutes'
 import axios from 'axios'
 
-const QuestionDetails = () => {
+const QuestionDetails = ({question, id}) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [currentUserName, setCurrentUserName] = useState(null);
-  const [questionsList, setQuestionsList] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [questionsList, setQuestionsList] = useState([]);
   const [answer, setAnswer] = useState("");
   const [answerError, setAnswerError] = useState("");
+  const [upVote, setUpVote] = useState(question.upVotes);
+  const [downVote, setDownVote] = useState(question.downVotes);
   const [makeTheLineVisible, setMakeTheLineVisible] = useState(false);
 
-  const {id} = useParams();
+  // const {id} = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const url = "http://localhost:3000";
@@ -33,27 +36,15 @@ const QuestionDetails = () => {
       setCurrentUser(userData);
       setCurrentUserId(userData._id);
       setCurrentUserName(userData.name);
-      console.log("User data found in local storage:", userData);
-      console.log("CURRENT USER: ", currentUser);  
+      // console.log("User data found in local storage:", userData);
+      // console.log("CURRENT USER: ", currentUser);  
     }
     else{
       console.log("You need to login to check question details.")
       navigate('/auth')
     }
   }, [navigate]);
-    
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const response = await axios.get(getQuestionRoute);
-        setQuestionsList(response.data);
-        console.log("RESPONSE TO FETCH QUESTIONS: ", response);
-      } catch (error) {
-        console.error("Error fetching questions:", error);
-      }
-    };
-    fetchQuestions();
-  }, []);
+
     
   const handleShare = () => {
     copy(url + location.pathname);
@@ -93,28 +84,58 @@ const QuestionDetails = () => {
         // console.log("ANSWER SET");
         setAnswer("");
         setAnswerError("");
-      }; 
+      };
     }
+  };
+
+  const handleUpVote = async (upvote, downvote) => {
+    console.log("handleUpVote........ question.upvotes: ", upvote);
+    
+    const {data} = await axios.patch(`${host}/questions/vote/${id}`, {
+      upVotes: upvote + 1,
+      downVotes: downvote,
+   });
+    if(data.status === true){ 
+      setUpVote(data.upVotes);
+      setDownVote(data.downVotes);
+      console.log("upvoted........... from useState", data.upVotes); 
+    }
+    else console.log("error upvoting");
+  };
+
+  const handleDownVote = async (upvote, downvote) => {
+    console.log("handleDownVote........ question.downvotes: ", downvote);
+    
+    const {data} = await axios.patch(`${host}/questions/vote/${id}`, {
+      upVotes: upvote,
+      downVotes: downvote + 1,
+   });
+    if(data.status === true){ 
+      setUpVote(data.upVotes);
+      setDownVote(data.downVotes);
+      console.log("downvoted........... from useState", data.downVotes); 
+    }
+    else console.log("error downvoting");
   };
 
   return (
     <div className={styles.displayPage}>
-      {questionsList === null?(
-        <div className='w-full mt-16 flex justify-center items-center'>
+      {/* {isLoading?(
+        <div className='w-full h-fit flex justify-center items-center'>
             <img src={loader} alt='loading' width={100} height={100}/>
           </div>
-        ):(
+        ):( */}
       <>
-      {questionsList?.filter(question => question._id === id).map(question => (
+       {/*{questionsList?.filter(question => question._id === id).map(question => ( */}
         <div key={question._id}>
           <section>
             <h1 className={styles.questionTitle}>{question.questionTitle}</h1>
             <hr className='m-2'/>
             <div className={styles.questions}>
               <div className={styles.count}>
-                <img src={voteUp} alt='vote-up'/>
-                <p>{question.upVotes - question.downVotes}</p>
-                <img src={voteDown} alt='vote-down'/>
+                <img src={voteUp} alt='vote-up' onClick={(e)=>handleUpVote(upVote, downVote)}/>
+                <p>{upVote-downVote}</p>
+                <img src={voteDown} alt='vote-down' onClick={(e)=>handleDownVote(upVote, downVote)}/>
               </div>
               <div className={styles.questionBody}>
                 <h5>{question.questionBody}</h5>
@@ -136,7 +157,7 @@ const QuestionDetails = () => {
               <div>
                 <button onClick={handleShare}>Share</button>
                 {
-                  currentUser._id === question.userId && (
+                  currentUser?._id === question.userId && (
                     <button onClick={(e)=>handleDelete(e)}>Delete</button> 
                   )
                 }
@@ -185,10 +206,10 @@ const QuestionDetails = () => {
           
           <hr className='m-2'/>
         </div>
-        ))
-      }
+        {/* ))
+      } */}
       </>
-      )}
+      {/* )} */}
     </div>
   )
 }

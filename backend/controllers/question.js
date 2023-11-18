@@ -1,7 +1,7 @@
 const Question =  require('../models/question')
 
 const AskQuestion = async (req, res, next) => {
-    const {questionTitle, questionBody,  questionTags, currentUserName, currentUserId} = req.body;
+    const {questionTitle, questionBody,  questionTags, currentUserName, currentUserId, upVotes, downVotes} = req.body;
         
     try {
 
@@ -51,8 +51,24 @@ const deleteQuestion = async (req, res, next) => {
     
 }
 
-const voteQuestion = (req, res, next) => {
-
+const voteQuestion = async (req, res, next) => {
+    const { id:_id } = req.params;
+    const { upVotes, downVotes } = req.body;
+    console.log(req.body);
+    
+  
+    try{
+        const upVote = await Question.findByIdAndUpdate(_id, {
+            $set: {upVotes: upVotes},
+        })
+        const downVote = await Question.findByIdAndUpdate(_id, {
+            $set: {downVotes: downVotes},
+        })
+        res.status(200).json({msg:`question with id: ${_id} voted`, upVotes:upVotes, downVotes:downVotes, status:true});
+    }catch(error){
+        console.log(error);
+        res.status(400).json({status:false, error})
+    }
 }
 
 module.exports =  {AskQuestion, getAllQuestions, deleteQuestion, voteQuestion};
