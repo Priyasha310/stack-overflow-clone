@@ -18,7 +18,7 @@ const QGlossary = () => {
       if (localStorage.getItem('user_data')) {
         const userData = await JSON.parse(localStorage.getItem("user_data"))
         setCurrentUser(userData);
-        console.log("User data found in local storage:", userData); 
+        // console.log("User data found in local storage:", userData); 
         // console.log("CURRENT USER ", currentUser);
       }
     }

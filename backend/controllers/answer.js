@@ -8,7 +8,7 @@ const postAnswer = async (req, res)=>{
     if(!mongoose.Types.ObjectId.isValid(_id)){
         return res.status(404).json({msg:'Question invalid..', status:false})
     }
-    updateNoOfQuestions(_id, noOfAnswers);
+    updateNoOfAnswers(_id, noOfAnswers);
     try {
         if(!answerBody) res.status(400).json({msg:'Enter answer to post', status:false});
         const updatedQuestion = await Questions.findByIdAndUpdate(_id, 
@@ -22,14 +22,14 @@ const postAnswer = async (req, res)=>{
     }
 }
 
-const updateNoOfQuestions = async(_id, noOfAnswers) => {
-    try{
-        await Questions.findByIdAndUpdate(_id, {
-            $set: {noOfAnswers: noOfAnswers},
-        })
-    }catch(error){
-        console.log(error);
-    }
+const updateNoOfAnswers = async(_id, noOfAnswers) => {
+  try{
+      await Questions.findByIdAndUpdate(_id, {
+          $set: {noOfAnswers: noOfAnswers},
+      })
+  }catch(error){
+      console.log(error);
+  }
 }
 
 const deleteAnswer = async(req, res) => {}

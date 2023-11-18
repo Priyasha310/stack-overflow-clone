@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const handleLogout =  () => {
     localStorage.clear();
-    navigate("/auth");
+    setCurrentUser(null);
   }
 
   return (
