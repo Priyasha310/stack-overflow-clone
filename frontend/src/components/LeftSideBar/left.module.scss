@@ -13,8 +13,8 @@
 
 .divHeading{
     @apply uppercase cursor-text;
-    @apply  text-light-gray;
-    @apply p-2;
+    @apply  text-black text-[10px] font-bold;
+    @apply pt-6;
 }
 
 .sideNavLinks{

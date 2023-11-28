@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './avatar.module.scss'
 
-const Avatar = ({children, backgroundColor,width, height, px,pt, py, color, borderRadius, fontSize, cursor}) => {
+const Avatar = ({children, backgroundColor,width, height, px, py, color, borderRadius, fontSize, cursor}) => {
 
     const style = {
         backgroundColor: backgroundColor ||'#009dff' , 
-        padding: `${py} ${pt} ${px} `, 
+        padding: `${py}  ${px} ` || '0 0', 
         color: color || 'black', 
         borderRadius, 
         fontSize ,

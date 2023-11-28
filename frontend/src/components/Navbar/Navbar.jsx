@@ -46,7 +46,7 @@ const Navbar = () => {
             <Link to="/auth"  className={`${styles.navItem} ${styles.navBtn}`} >Log In</Link>
           ):(
             <div className={styles.user}>
-              <Avatar backgroundColor='#009dff' width='30px' height='30px' px='10px' pt='3px' py='' borderRadius='50%' >
+              <Avatar backgroundColor='#009dff' width='30px' height='30px' px='0px' py='3px' borderRadius='50%' >
                 <Link to='/auth'>{currentUser.name.charAt(0)}</Link>
               </Avatar>
               <button className={`${styles.navItem} ${styles.navBtn}`} onClick={handleLogout}>Log out</button>

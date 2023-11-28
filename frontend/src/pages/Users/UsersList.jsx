@@ -1,8 +1,14 @@
 import React from 'react'
+import User from './User'
+import styles from './user.module.scss'
 
-const UsersList = () => {
+const UsersList = ({userslist}) => {
   return (
-    <div>UsersList</div> 
+    <div className={styles.usersList}>
+      {userslist.map((user) => (
+        <User user={user} key={user._id}/>
+      ))}
+    </div>
   )
 }
 

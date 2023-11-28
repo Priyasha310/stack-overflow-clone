@@ -1,0 +1,30 @@
+.usersList{
+    @apply w-full;
+    @apply my-8;
+    @apply flex flex-row gap-12;
+
+    >:first-child{
+        @apply ml-8;
+    }
+}
+
+.users{
+    @apply flex flex-row gap-2;
+    
+    h3{
+        @apply text-lg;
+    }
+}
+
+.userProfileLink{
+    @apply w-20_100;
+}
+
+.userTitle{
+    :first-child{
+        @apply text-link-color text-sm;
+    }
+    :nth-child(2){
+        @apply text-[10px] text-faint-black;
+    }
+}

@@ -171,7 +171,7 @@ const QuestionDetails = ({question, id}) => {
                   style={{ color: "#0086d8" }}
                 >
                 <div className='flex flex-row gap-2 my-1'>
-                  <Avatar backgroundColor="orange" px="8px" py="4px" pt='' fontSize='14px' borderRadius="4px">
+                  <Avatar backgroundColor="tomato" px="8px" py="4px" fontSize='14px' borderRadius="4px">
                     {question.userPosted?.charAt(0).toUpperCase()}
                   </Avatar>
                   <div>{question.userPosted}</div></div>
@@ -189,7 +189,6 @@ const QuestionDetails = ({question, id}) => {
                 question={question}
                 handleShare={handleShare}
               />
-            <hr className='m-2'/>
             </section>
           )}
 

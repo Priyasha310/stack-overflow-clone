@@ -59,7 +59,10 @@ const QGlossary = () => {
         <button type='submit' onClick={checkAuth}>Ask Question</button>
       </div>
       <div className='flex flex-row'>
-        {questionsList ? (<h1 className='w-full ml-7 mt-2'>{questionsList.length} {questionsList.length > 1? "questions": "question"}</h1>  ): <h1 className='w-full ml-7 mt-2'>0 question</h1>}
+        {questionsList ? 
+          (<h1 className='w-full ml-7 mt-2'>{questionsList.length} questions</h1>):
+          <h1 className='w-full ml-7 mt-2'>0 question</h1>
+        }
         <div className={styles.filter}>
           <p>Interesting</p>
           <p>Bountied</p>
