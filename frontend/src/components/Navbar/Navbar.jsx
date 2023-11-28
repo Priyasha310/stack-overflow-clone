@@ -21,6 +21,7 @@ const Navbar = () => {
   const handleLogout =  () => {
     localStorage.clear();
     setCurrentUser(null);
+    navigate('/');
   }
 
   return (
