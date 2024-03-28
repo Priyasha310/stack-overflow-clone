@@ -71,12 +71,11 @@
     }
     
     ::placeholder{
-        @apply absolute top-2 left-8;
         @apply text-xs;
     }
     .searchIcon{
         @apply block sm:hidden;
-        @apply absolute top-2 left-5;
+        @apply absolute top-[0.35rem] left-5;
     }
 
 }

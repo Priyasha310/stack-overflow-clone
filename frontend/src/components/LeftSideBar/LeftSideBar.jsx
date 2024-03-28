@@ -18,46 +18,44 @@ const LeftSideBar = () => {
     <div className={styles.leftSidebar}>
       <nav className={styles.sideNav}>
         <NavLink to='/' className={(props)=>`${props.isActive? styles.active: ''} ${styles.sideNavLinks}`}>  
-        <div className='flex items-center justify-center gap-1'>
+        <div className={styles.tab}>
           <IoMdHome size={18}/>      
           <p>Home</p>
         </div>  
-          
         </NavLink>
         
         <div className={styles.sideNavDiv}>
           <div className={styles.divHeading}><p>Public</p></div>
             <NavLink to='/questions' className={(props)=>`${props.isActive? styles.active: ''} ${styles.sideNavLinks}`}>
-            <div className='flex items-center justify-center gap-1'>
+            <div className={styles.tab}>
               <SiAskubuntu size={15}/>
               <p>Questions</p>
             </div>  
-              
             </NavLink>
             
             <NavLink to='/tags' className={(props)=>`${props.isActive? styles.active: ''} ${styles.sideNavLinks}`}>
-              <div className='flex items-center justify-center gap-1'>
+              <div className={styles.tab}>
                 <IoMdPricetags size={15}/>
                 <p>Tags</p>
               </div>  
             </NavLink>
             
             {/* <NavLink to='/saves' className={(props)=>`${props.isActive? styles.active: ''} ${styles.sideNavLinks}`}>
-              <div className='flex items-center justify-center gap-1'>
+              <div className={styles.tab}>
                 <IoMdBookmark size={15}/>
                 <p>Saves</p>
               </div>  
             </NavLink> */}
             
             <NavLink to='/users' className={(props)=>`${props.isActive? styles.active: ''} ${styles.sideNavLinks}`}>            
-              <div className='flex items-center justify-center gap-1'>
+              <div className={styles.tab}>
                 <ImUsers size={15}/>
                 <p>Users</p>
               </div>  
             </NavLink>
             
             <NavLink to='/companies' className={(props)=>`${props.isActive? styles.active: ''} ${styles.sideNavLinks}`}>            
-              <div className='flex items-center justify-center gap-1'>
+              <div className={styles.tab}>
                 <IoBag size={15}/>
                 <p>Companies</p>
               </div>  
@@ -65,16 +63,16 @@ const LeftSideBar = () => {
         </div>
 
         <div className={styles.sideNavDiv}>
-          <div className={styles.divHeading}>Collectives</div>
+          <div className={`${styles.divHeading}`} >Collectives</div>
           <NavLink to='/explore-collectives'  className={(props)=>`${props.isActive? styles.active: ''} ${styles.sideNavLinks}`}>          
-            <div className='flex items-center justify-center gap-1'>
-              <div className='absolute z-0 left-[71px] pt-3'>
+            <div className={`${styles.tab} p-2`}>
+              <div className='absolute z-0 left-[71px]'>
                 <TiStarburst size={19} color='#ef8236'/>
               </div>
-                <div className='absolute z-10 left-[75px] pt-3'>
-                  <GoStarFill  size={11} color='white'/>
+                <div className='absolute z-10 left-[75px]'>
+                  <GoStarFill  size={11} color='#fff'/>
                 </div>
-              <p className='absolute left-[90px] pt-3'>Explore Collectives</p>
+              <p className='absolute left-[92px]'>Explore Collectives</p>
             </div>
           </NavLink>
         </div>
@@ -82,9 +80,9 @@ const LeftSideBar = () => {
         <div className={styles.sideNavDiv}>
           <div className={styles.divHeading}>Labs</div>
           <NavLink to='/discussions'  className={(props)=>`${props.isActive? styles.active: ''} ${styles.sideNavLinks}`}>          
-            <div className='flex items-center justify-center gap-1'>
-            <IoChatbox size={15}/>
-            <p>Discussions</p>
+            <div className={styles.tab}>
+              <IoChatbox size={15}/>
+              <p>Discussions</p>
             </div>   
           </NavLink>
         </div>

@@ -29,3 +29,6 @@
     @apply border-r-4 border-solid border-icon-color;
 }
 
+.tab{
+    @apply flex items-center justify-center gap-1;
+}
