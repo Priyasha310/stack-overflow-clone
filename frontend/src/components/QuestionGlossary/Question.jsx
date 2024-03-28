@@ -10,7 +10,7 @@ const Question = ({question}) => {
           <div className={styles.count}>
             <p>{question.upVotes - question.downVotes} votes</p>
             <p>{question.answer.length} answers</p>
-            <p>{question.views} views</p>
+            {/* <p>{question.views} views</p> */}
           </div>
           <div className={styles.questionTitle}>
             <Link to={`/questions/${question._id}`} >{question.questionTitle}</Link>

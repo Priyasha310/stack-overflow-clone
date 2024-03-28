@@ -132,7 +132,7 @@ const Auth = () => {
           {isSignup && (
             <label htmlFor='checkbox'>
               <input type='checkbox' name='Confirm Password' id='checkbox'/>
-              <p className='pl-1 leading-4 font-normal'><br/>Opt-in to receive occasional product updates, user research invitations, company announcements, and digests.</p> 
+              <p className='pl-1 leading-4 font-normal'><br/>Opt-in to receive occasional product updates, user research invitations, company announcements, and digests.(Non-functional feature)</p> 
             </label>
           )}
               

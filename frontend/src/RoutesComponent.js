@@ -7,6 +7,7 @@ import AskQuestions from 'pages/AskQuestions/AskQuestions'
 import DisplayQuestion from 'pages/Questions/DisplayQuestion'
 import Tags from 'pages/Tags/Tags'
 import Users from 'pages/Users/Users'
+import Companies from 'pages/Companies/Companies'
 
 const RoutesComponent = () => {
 
@@ -17,8 +18,10 @@ const RoutesComponent = () => {
           <Route path='/questions' element={<Questions/>} />
           <Route path='/tags' element={<Tags/>} />
           <Route path='/users' element={<Users/>} />
+          <Route path='/companies' element={<Companies/>} />
           <Route path='/questions/:id' element={<DisplayQuestion/>} />
           <Route path='/questions/ask' element={<AskQuestions/>} />
+          {/* <Route path='/discussions' element={<Companies/>} /> */}
       </Routes>
   )
 }
